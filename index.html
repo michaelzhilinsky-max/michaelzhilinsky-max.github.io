@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Michael Zhilinsky — Student Developer · AI & Robotics</title>
+  <style>
+    :root {
+      --bg:        #07090f;
+      --bg2:       #0d1120;
+      --bg3:       #111828;
+      --border:    #1a2436;
+      --gold:      #c9a84c;
+      --gold-dim:  #8a6e2f;
+      --blue:      #4e9eff;
+      --blue-dim:  #2a5a99;
+      --text:      #d8dde8;
+      --text-dim:  #6a7a90;
+      --text-muted:#3a4a5a;
+      --radius:    10px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7,9,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 56px;
+    }
+    .nav-logo {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── Sections ── */
+    section { padding: 80px 0; }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 28px; }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #e8edf5;
+      margin-bottom: 40px;
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 40%, rgba(78,158,255,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(201,168,76,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.75rem;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      margin-bottom: 22px;
+    }
+    .hero-badge::before { content: '●'; font-size: 0.55rem; }
+
+    .hero-name {
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: #f0f4ff;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .hero-name span { color: var(--gold); }
+
+    .hero-tagline {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      max-width: 520px;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--gold);
+      color: #07090f;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 11px 22px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .btn-primary:hover { background: #dbbf6a; transform: translateY(-1px); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      padding: 11px 22px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: border-color 0.15s, color 0.15s, transform 0.1s;
+    }
+    .btn-outline:hover { border-color: #3a5a7a; color: var(--text); transform: translateY(-1px); }
+
+    /* Hero stats */
+    .hero-stats {
+      display: flex;
+      gap: 36px;
+      margin-top: 52px;
+      padding-top: 36px;
+      border-top: 1px solid var(--border);
+    }
+    .stat-num {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #e8edf5;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 2px;
+    }
+
+    /* ── Projects ── */
+    #projects { background: var(--bg2); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .project-card:hover {
+      border-color: #2a4060;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+
+    .project-preview {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-preview.arm-bg {
+      background: linear-gradient(135deg, #0a1020 0%, #0d1e38 50%, #0a1428 100%);
+    }
+    .project-preview.hand-bg {
+      background: linear-gradient(135deg, #100a1a 0%, #1e0d2e 50%, #140a20 100%);
+    }
+
+    .project-preview .grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(78,158,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(78,158,255,0.05) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .project-preview .icon {
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 0 20px rgba(78,158,255,0.4));
+    }
+
+    .project-body { padding: 22px 24px 24px; }
+
+    .project-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .tag {
+      background: rgba(78,158,255,0.1);
+      border: 1px solid rgba(78,158,255,0.2);
+      color: var(--blue);
+      font-size: 0.68rem;
+      padding: 3px 9px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .project-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #e8edf5;
+      margin-bottom: 8px;
+    }
+    .project-desc {
+      font-size: 0.84rem;
+      color: var(--text-dim);
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 10px;
+    }
+    .project-link {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 7px 16px;
+      border-radius: 7px;
+      transition: all 0.15s;
+      letter-spacing: 0.03em;
+    }
+    .project-link.demo {
+      background: var(--blue-dim);
+      color: #b0d4ff;
+    }
+    .project-link.demo:hover { background: #3a74c0; color: #fff; }
+    .project-link.source {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+    }
+    .project-link.source:hover { border-color: #2a4060; color: var(--text); }
+
+    /* ── Experience ── */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 0 32px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-item:last-child { border-bottom: none; }
+
+    .exp-meta { padding-top: 2px; }
+    .exp-date {
+      font-size: 0.75rem;
+      color: var(--gold);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+    .exp-company {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+    .exp-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #e8edf5;
+      margin-bottom: 8px;
+    }
+    .exp-desc {
+      font-size: 0.84rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .exp-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+    .highlight-tag {
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.18);
+      color: var(--gold-dim);
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    /* ── Skills ── */
+    #skills { background: var(--bg2); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .skill-group { }
+    .skill-group-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .skill-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .skill-pill {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 0.78rem;
+      padding: 5px 12px;
+      border-radius: 6px;
+    }
+
+    /* ── Honors ── */
+    .honors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .honor-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      transition: border-color 0.15s;
+    }
+    .honor-card:hover { border-color: rgba(201,168,76,0.3); }
+    .honor-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+    .honor-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #d0d8e8;
+      margin-bottom: 3px;
+    }
+    .honor-desc { font-size: 0.77rem; color: var(--text-dim); line-height: 1.5; }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 48px 0 40px;
+      text-align: center;
+    }
+    .footer-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .footer-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy {
+      margin-top: 28px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.6s ease both; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.22s; }
+    .delay-3 { animation-delay: 0.34s; }
+    .delay-4 { animation-delay: 0.46s; }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hero-stats { gap: 20px; flex-wrap: wrap; }
+      .exp-item { grid-template-columns: 1fr; gap: 6px; }
+      .exp-meta { display: flex; gap: 12px; align-items: center; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<nav>
+  <a href="#hero" class="nav-logo">MZ</a>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#honors">Honors</a></li>
+  </ul>
+</nav>
+
+<!-- ── Hero ── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="container hero-content">
+    <div class="hero-badge fade-up">Student Developer · AI & Robotics · Aspiring Founder</div>
+    <h1 class="hero-name fade-up delay-1">Michael<br><span>Zhilinsky</span></h1>
+    <p class="hero-tagline fade-up delay-2">
+      Junior at Monta Vista High School &amp; De Anza College. I build full-stack apps,
+      train robot manipulation policies, and ship products — two internships,
+      one App Store launch, and 1,000+ users at 16.
+    </p>
+    <div class="hero-links fade-up delay-3">
+      <a href="mailto:michaelzhilinsky@gmail.com" class="btn-primary">✉ Email Me</a>
+      <a href="https://linkedin.com/in/michael-zhilinsky-b88696381" target="_blank" rel="noopener" class="btn-outline">LinkedIn</a>
+      <a href="https://github.com/michaelzhilinsky-max" target="_blank" rel="noopener" class="btn-outline">GitHub</a>
+    </div>
+    <div class="hero-stats fade-up delay-4">
+      <div>
+        <div class="stat-num">2</div>
+        <div class="stat-label">Internships at 16</div>
+      </div>
+      <div>
+        <div class="stat-num">1K+</div>
+        <div class="stat-label">Active Users</div>
+      </div>
+      <div>
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Robot Training Episodes</div>
+      </div>
+      <div>
+        <div class="stat-num">Top 10%</div>
+        <div class="stat-label">YC Applicant Pool</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ── Projects ── -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label">What I've Built</div>
+    <h2 class="section-title">Interactive Projects</h2>
+
+    <div class="projects-grid">
+
+      <!-- Robot Arm -->
+      <div class="project-card">
+        <div class="project-preview arm-bg">
+          <div class="grid-lines"></div>
+          <div class="icon">🦾</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">Three.js</span>
+            <span class="tag">3D / WebGL</span>
+            <span class="tag">Animation</span>
+          </div>
+          <div class="project-title">3D Robot Arm</div>
+          <p class="project-desc">
+            An interactive 6-DOF robot arm rendered in the browser with Three.js.
+            Drag to rotate, control joint angles, and watch inverse kinematics in action —
+            fully live on the web.
+          </p>
+          <div class="project-links">
+            <a href="https://michaelzhilinsky-max.github.io/robot-arm-demo" target="_blank" rel="noopener" class="project-link demo">▶ Live Demo</a>
+            <a href="https://github.com/michaelzhilinsky-max/robot-arm-demo" target="_blank" rel="noopener" class="project-link source">⌥ Source</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Robot Hand -->
+      <div class="project-card">
+        <div class="project-preview hand-bg">
+          <div class="grid-lines"></div>
+          <div class="icon">🤖</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">Three.js</span>
+            <span class="tag">3D / WebGL</span>
+            <span class="tag">Kinematics</span>
+          </div>
+          <div class="project-title">3D Robot Hand</div>
+          <p class="project-desc">
+            Articulated 5-finger robot hand with per-joint grasp animation.
+            Choose an object — Apple, Fork, or Rubik's Cube — and watch the hand
+            wrap around it with realistic finger curl. Interactive orbit controls.
+          </p>
+          <div class="project-links">
+            <a href="https://michaelzhilinsky-max.github.io/robot-hand-demo" target="_blank" rel="noopener" class="project-link demo">▶ Live Demo</a>
+            <a href="https://github.com/michaelzhilinsky-max/robot-hand-demo" target="_blank" rel="noopener" class="project-link source">⌥ Source</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ── Experience ── -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Where I've Worked</div>
+    <h2 class="section-title">Experience</h2>
+
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-date">Summer 2026</div>
+          <div class="exp-company">Mind Robotics</div>
+        </div>
+        <div>
+          <div class="exp-title">ML Intern</div>
+          <p class="exp-desc">
+            Competitive paid internship building AI-driven robotics systems. Trained robot manipulation policies
+            via imitation learning and behavior cloning using real-world teleoperated demonstrations.
+            Designed 10+ task environments, logged 500+ training episodes, curated datasets,
+            and improved the teleop UI used by human operators to guide robot arms.
+          </p>
+          <div class="exp-highlights">
+            <span class="highlight-tag">Imitation Learning</span>
+            <span class="highlight-tag">Behavior Cloning</span>
+            <span class="highlight-tag">Robot Teleoperation</span>
+            <span class="highlight-tag">Data Curation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-date">Summer 2026</div>
+          <div class="exp-company">Luminary Genetics</div>
+        </div>
+        <div>
+          <div class="exp-title">Intern</div>
+          <p class="exp-desc">
+            Applied genomics company at the intersection of AI and genetic analysis.
+            Accelerated the embryo analysis pipeline and proposed an anomaly detection solution
+            to flag irregular patterns in genetic datasets — enabling earlier identification of data quality issues.
+          </p>
+          <div class="exp-highlights">
+            <span class="highlight-tag">Bioinformatics</span>
+            <span class="highlight-tag">Anomaly Detection</span>
+            <span class="highlight-tag">AI in Life Sciences</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ── Skills ── -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label">Technical Stack</div>
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-label">Languages</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">JavaScript</span>
+          <span class="skill-pill">HTML / CSS</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Frameworks</div>
+        <div class="skill-pills">
+          <span class="skill-pill">React</span>
+          <span class="skill-pill">FastAPI</span>
+          <span class="skill-pill">Three.js</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">AI / ML</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Machine Learning</span>
+          <span class="skill-pill">Imitation Learning</span>
+          <span class="skill-pill">scikit-learn</span>
+          <span class="skill-pill">pandas</span>
+          <span class="skill-pill">AI / LLM APIs</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Robotics</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Robot Teleoperation</span>
+          <span class="skill-pill">Data Curation</span>
+          <span class="skill-pill">Training Pipelines</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Tools</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Git</span>
+          <span class="skill-pill">Full-Stack Dev</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ── Honors ── -->
+<section id="honors">
+  <div class="container">
+    <div class="section-label">Recognition</div>
+    <h2 class="section-title">Honors & Distinctions</h2>
+    <div class="honors-grid">
+      <div class="honor-card">
+        <div class="honor-icon">🏆</div>
+        <div>
+          <div class="honor-title">DECA State & International Finalist</div>
+          <div class="honor-desc">Placed as a finalist at both state and international levels in entrepreneurship events.</div>
+        </div>
+      </div>
+      <div class="honor-card">
+        <div class="honor-icon">🥇</div>
+        <div>
+          <div class="honor-title">FBLA Dual State Finalist & National Qualifier</div>
+          <div class="honor-desc">Qualified for nationals after placing as a finalist at the state level across two events.</div>
+        </div>
+      </div>
+      <div class="honor-card">
+        <div class="honor-icon">🚀</div>
+        <div>
+          <div class="honor-title">Y Combinator — Top 10%</div>
+          <div class="honor-desc">Spring 2026. Ranked in the top 10% of the applicant pool against experienced adult founders.</div>
+        </div>
+      </div>
+      <div class="honor-card">
+        <div class="honor-icon">📱</div>
+        <div>
+          <div class="honor-title">Published Developer</div>
+          <div class="honor-desc">Shipped an Apple App Store app and built websites reaching 1,000+ active users.</div>
+        </div>
+      </div>
+      <div class="honor-card">
+        <div class="honor-icon">🌟</div>
+        <div>
+          <div class="honor-title">President's Volunteer Service Award — Gold</div>
+          <div class="honor-desc">Completed 100+ hours of community service (2023–2024).</div>
+        </div>
+      </div>
+      <div class="honor-card">
+        <div class="honor-icon">🥋</div>
+        <div>
+          <div class="honor-title">1st Dan Black Belt — Taekwondo</div>
+          <div class="honor-desc">Achieved 2017. Discipline, focus, and commitment since childhood.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="footer-name">Michael Zhilinsky</div>
+  <div class="footer-sub">Student Developer · AI & Robotics · Aspiring Founder · San Jose, CA</div>
+  <div class="footer-links">
+    <a href="mailto:michaelzhilinsky@gmail.com">✉ michaelzhilinsky@gmail.com</a>
+    <a href="https://linkedin.com/in/michael-zhilinsky-b88696381" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/michaelzhilinsky-max" target="_blank" rel="noopener">GitHub</a>
+  </div>
+  <div class="footer-copy">© 2026 Michael Zhilinsky. Built with Three.js & vanilla HTML/CSS.</div>
+</footer>
+
+</body>
+</html>
